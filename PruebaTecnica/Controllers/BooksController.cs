@@ -17,10 +17,9 @@ namespace PruebaTecnica.Controllers
         public IHttpActionResult Get()
         {
             ApiHelper apiBooks = new ApiHelper();
-            string bookjson = apiBooks.GetBooks();
-            
             try
             {
+                string bookjson = apiBooks.GetBooks();
                 //CrearObjeto
                 JArray arrayBook = JArray.Parse(bookjson);
                 IList<Book> BooksList = arrayBook.ToObject<IList<Book>>();
@@ -37,10 +36,10 @@ namespace PruebaTecnica.Controllers
         public IHttpActionResult Get(int id)
         {
             ApiHelper apiBooks = new ApiHelper();
-            string bookjson = apiBooks.GetBook(id);
 
             try
             {
+                string bookjson = apiBooks.GetBook(id);
                 //CrearObjeto
                 dynamic objc = JObject.Parse(bookjson);
                 Book Modelo = objc.ToObject<Book>();
@@ -53,13 +52,34 @@ namespace PruebaTecnica.Controllers
         }
 
         // POST api/books
-        public IHttpActionResult Get(Book Libro)
+        [HttpPost]
+        public IHttpActionResult Post(Book Libro)
         {
             ApiHelper apiBooks = new ApiHelper();
-            string bookjson = apiBooks.PostBook(Libro);
 
             try
             {
+                string bookjson = apiBooks.PostBook(Libro);
+                //CrearObjeto
+                dynamic objc = JObject.Parse(bookjson);
+                Book Modelo = objc.ToObject<Book>();
+                return CreatedAtRoute("Get", new { id = Libro.ID }, Libro);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Error al agregar el libro");
+            }
+        }
+
+        // PUT
+        [HttpPut]
+        public IHttpActionResult Put(int id, Book Libro)
+        {
+            ApiHelper apiBooks = new ApiHelper();
+
+            try
+            {
+                string bookjson = apiBooks.PutBook(id, Libro);
                 //CrearObjeto
                 dynamic objc = JObject.Parse(bookjson);
                 Book Modelo = objc.ToObject<Book>();
@@ -67,11 +87,26 @@ namespace PruebaTecnica.Controllers
             }
             catch (Exception ex)
             {
-                return NotFound();
+                return BadRequest("Error al actualizar el libro");
             }
         }
 
+        // DELETE
+        [HttpDelete]
+        public IHttpActionResult Delete(int id)
+        {
+            ApiHelper apiBooks = new ApiHelper();
 
+            try
+            {
+                string bookjson = apiBooks.DeleteBook(id);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Error al borrar el libro");
+            }
+        }
 
     }
 }
