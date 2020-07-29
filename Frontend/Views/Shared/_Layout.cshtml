@@ -38,5 +38,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
+    <!-- jq date picker -->
+    <script src="@Url.Content("~/Scripts/jquery.datetimepicker.full.js")"></script>
+    @RenderSection("footerscripts", required: false)
 </body>
 </html>

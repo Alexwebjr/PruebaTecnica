@@ -1,7 +1,7 @@
 ﻿@model Frontend.Models.Book
+
 @{
-    ViewBag.Title = "Home Page";
-    int order = 1; //Contador
+    ViewBag.Title = "Edit";
 }
 
 <!--Listado-->
@@ -19,42 +19,19 @@
             </tr>
         </thead>
         <tbody>
-            @if (ViewBag.BooksList != null)
-            {
-                foreach (var book in ViewBag.BooksList)
-                {
-                    <tr>
-                        <th scope="row">@order</th>
-                        <td>@book.Title</td>
-                        <td>@book.Description</td>
-                        <td>@book.PageCount</td>
-                        <td>@book.Excerpt</td>
-                        <td>@book.PublishDate</td>
-                        <td>
-                            <button type="button" class="btn btn-success">Edit</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
-                        </td>
-                    </tr>
-                    order++;
-                }
-            }
-            else { 
-
-        <tr>
-            <th scope="row">@order</th>
-            <td>@Model.Title</td>
-            <td>@Model.Description</td>
-            <td>@Model.PageCount</td>
-            <td>@Model.Excerpt</td>
-            <td>@Model.PublishDate</td>
-            <td>
-                <button type="button" class="btn btn-success">Edit</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-            </td>
-        </tr>
-                    }
-
-            </tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>@Model.Title</td>
+                <td>@Model.Description</td>
+                <td>@Model.PageCount</td>
+                <td>@Model.Excerpt</td>
+                <td>@Model.PublishDate</td>
+                <td>
+                    <button type="button" class="btn btn-success">Edit</button>
+                    <button type="button" class="btn btn-danger">Delete</button>
+                </td>
+            </tr>
+        </tbody>
         </table>
     </div>
     <!--Form-->
@@ -115,3 +92,4 @@
         }
         </script>
     }
+
